@@ -1,7 +1,7 @@
 class Node {
-  constructor(data, next = null) {
+  constructor(data) {
     this.data = data;
-    this.next = next;
+    this.next = null;
   }
 }
 
@@ -84,15 +84,4 @@ class List {
   }
 }
 
-const list = new List();
-
-list.add(5);
-list.add(10);
-list.add(20);
-list.add(30);
-list.insertAt(15, 2);
-list.insertAt(1, 0);
-list.insertAt(40, 6);
-list.removeFrom(4);
-
-console.log(list.getList());
+module.exports = { List, Node };

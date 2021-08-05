@@ -1,0 +1,29 @@
+{
+  "name": "data-structure",
+  "version": "0.0.1",
+  "description": "This is datastructure implementation library for practice",
+  "main": "index.js",
+  "directories": {
+    "test": "__tests__"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mriduldey/data-structure.git"
+  },
+  "keywords": [
+    "data-structure",
+    "linked-list"
+  ],
+  "author": "Mridul Dey",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mriduldey/data-structure/issues"
+  },
+  "homepage": "https://github.com/mriduldey/data-structure#readme",
+  "devDependencies": {
+    "jest": "^27.0.6"
+  }
+}
