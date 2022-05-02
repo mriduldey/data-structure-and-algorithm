@@ -48,7 +48,7 @@ function findNthRoot2(n, root) {
   let start = 1,
     end = n;
 
-  const epsilon = 1e-6;
+  const epsilon = 1e-7;
 
   while (end - start > epsilon) {
     const mid = (start + end) / 2;
@@ -58,7 +58,7 @@ function findNthRoot2(n, root) {
       end = mid;
     }
   }
-  return parseInt(end, 10).toFixed(6); // upto 6 decimal
+  return parseFloat(end, 10).toFixed(6); // upto 6 decimal
 }
 
-console.log(2 + '    ', findNthRoot2(100, 2));
+console.log(2 + '    ', findNthRoot2(99, 2));
