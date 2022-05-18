@@ -18,7 +18,7 @@
 function getLPSArray(pat) {
   // length of the previous longest prefix suffix
   let len = 0;
-  const patLength = s.length;
+  const patLength = pat.length;
   const lps = [];
   lps.push(0); // first item is always 0 in lps
   let i = 1;
@@ -37,4 +37,36 @@ function getLPSArray(pat) {
       }
     }
   }
+
+  return lps;
 }
+
+// console.log(getLPSArray('abcdabcdxi')); // o/p [0,0,0,0,1,2,3,4,0,0]
+
+function KMPSearch(s, pat) {
+  const sLen = s.length;
+  const patLen = pat.length;
+  const lps = getLPSArray(pat);
+
+  let i = 0,
+    j = 0;
+
+  while (i < sLen) {
+    if (s[i] === pat[j]) {
+      i++, j++;
+    } else {
+      if (j > 0) {
+        j = lps[j - 1];
+      } else {
+        i++;
+      }
+    }
+
+    if (j === patLen) {
+      console.log(i - j);
+      j = lps[j - 1];
+    }
+  }
+}
+
+KMPSearch('abcdabcdabcdabcdabcd', 'c');
