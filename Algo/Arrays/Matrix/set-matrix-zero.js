@@ -32,25 +32,28 @@ column and 4th column will be set to 0
  */
 
 function setMatrixZero(matrix) {
-  const firstItem = matrix[0][0];
-  const rows = matrix.length - 1,
-    cols = matrix[0].length - 1;
+  let col0 = 1;
+  const rows = matrix.length,
+    cols = matrix[0].length;
 
-  for (let row = 1; row <= rows; row++) {
-    for (let col = 1; col <= cols; col++) {
+  for (let row = 0; row < rows; row++) {
+    if (matrix[row][0] === 0) {
+      col0 = 0;
+    }
+    for (let col = 1; col < cols; col++) {
       if (matrix[row][col] === 0) {
         matrix[row][0] = matrix[0][col] = 0;
       }
     }
   }
 
-  for (let row = rows; row >= 0; row--) {
-    for (let col = cols; col > 0; col--) {
+  for (let row = rows - 1; row >= 0; row--) {
+    for (let col = cols - 1; col >= 1; col--) {
       if (matrix[row][0] === 0 || matrix[0][col] === 0) {
         matrix[row][col] = 0;
       }
     }
-    if (firstItem === 0) {
+    if (col0 === 0) {
       matrix[row][0] = 0;
     }
   }
@@ -59,9 +62,11 @@ function setMatrixZero(matrix) {
 }
 
 const matrix = [
-  [2, 1, 1],
-  [3, 3, 6],
-  [5, 7, 0],
+  [0, 1, 1],
+  [2, 0, 4],
+  [4, 5, 0],
 ];
 console.log(matrix);
 console.log('output \n', setMatrixZero(matrix));
+
+module.exports = { setMatrixZero };
