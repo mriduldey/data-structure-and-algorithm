@@ -1,13 +1,13 @@
 /**
- * Note: the purpose of reconstruct path is no clear
+ * Note: the purpose of providing start-node (s) and end-node (e) is to get the shortest path between thse two nodes
  */
 
 const graph = {
   0: [7, 9, 11],
   1: [10, 8],
   2: [3, 12],
-  3: [2, 7],
-  4: [],
+  3: [2, 4, 7],
+  4: [3],
   5: [6],
   6: [5, 7],
   7: [0, 3, 11, 6],
@@ -72,6 +72,6 @@ function reconstructPath(s, e, prev) {
   return path;
 }
 
-const path = bfs(0, 12);
+const path = bfs(5, 10);
 
 console.log("Path", path);
