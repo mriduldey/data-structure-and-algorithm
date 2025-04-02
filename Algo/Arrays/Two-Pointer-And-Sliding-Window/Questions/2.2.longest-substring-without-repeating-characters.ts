@@ -29,4 +29,16 @@ Constraints:
 0 <= s.length <= 5 * 104
 s consists of English letters, digits, symbols and spaces.
  */
+function longestSubString(arr) {
+    let maxLength = 0;
+    return maxLength;
+}
 
+console.log(longestSubString("abcabcbb")); // 3
+console.log(longestSubString("bbbb")); // 1
+console.log(longestSubString("pwwkew")); // 3
+console.log(longestSubString("")); // 0
+console.log(longestSubString("a")); // 1
+console.log(longestSubString("ab")); // 2
+console.log(longestSubString("abc")); // 3
+console.log(longestSubString("abbcd")); // 4
