@@ -30,16 +30,18 @@ Constraints:
 s consists of English letters, digits, symbols and spaces.
  */
 function longestSubStringGoodSolution(arr) {
+    let l = 0;
+    let r = 0;
     let maxLength = 0;
-    for(let i = 0; i < arr.length; i++) {
-        const set = new Set();
-        for(let j = i; j < arr.length; j++) {
-            if(set.has(arr[j])) {
-                break;
-            } else {
-                set.add(arr[j]);
-                maxLength = Math.max(maxLength, j - i + 1);
-            }
+    const charSet = new Set();
+    while(r < arr.length) {
+        if(!charSet.has(arr[r])) {
+            charSet.add(arr[r]);
+            maxLength = Math.max(maxLength, r - l + 1);
+            r++;
+        } else {
+            charSet.delete(arr[l]);
+            l++;
         }
     }
     return maxLength;
@@ -52,4 +54,4 @@ console.log(longestSubStringGoodSolution("")); // 0
 console.log(longestSubStringGoodSolution("a")); // 1
 console.log(longestSubStringGoodSolution("ab")); // 2
 console.log(longestSubStringGoodSolution("abc")); // 3
-console.log(longestSubStringGoodSolution("abbcd")); // 4
+console.log(longestSubStringGoodSolution("abbcd")); // 3

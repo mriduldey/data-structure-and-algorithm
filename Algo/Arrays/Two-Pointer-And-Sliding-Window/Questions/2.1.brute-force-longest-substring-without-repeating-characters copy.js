@@ -31,6 +31,17 @@ s consists of English letters, digits, symbols and spaces.
  */
 function longestSubString(arr) {
     let maxLength = 0;
+    for(let i = 0; i < arr.length; i++) {
+        const set = new Set();
+        for(let j = i; j < arr.length; j++) {
+            if(set.has(arr[j])) {
+                break;
+            } else {
+                set.add(arr[j]);
+                maxLength = Math.max(maxLength, j - i + 1);
+            }
+        }
+    }
     return maxLength;
 }
 
@@ -41,4 +52,4 @@ console.log(longestSubString("")); // 0
 console.log(longestSubString("a")); // 1
 console.log(longestSubString("ab")); // 2
 console.log(longestSubString("abc")); // 3
-console.log(longestSubString("abbcd")); // 4
+console.log(longestSubString("abbcd")); // 3
