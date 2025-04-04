@@ -21,7 +21,7 @@
  * maxLen = 0 
  * 
  * while(r < n) {
- *  sum = saum + arr[r] // based on condition, this part can change
+ *  sum = sum + arr[r] // based on condition, this part can change
  *  while(sum > k) {
  *    sum = sum - arr[l];
  *    l++;
@@ -46,7 +46,7 @@
  * maxLen = 0 
  * 
  * while(r < n) {
- *   sum = saum + arr[r] // based on condition, this part can change
+ *   sum = sum + arr[r] // based on condition, this part can change
  * 
  *   optimization -- > we only need to shrink once.
  *   Because we don't want to reduce window len less than maxLen. 
