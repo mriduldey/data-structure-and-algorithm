@@ -36,24 +36,23 @@ function stringCountBetter(str) {
     let count = 0;
     // key -> characters in str, value -> respective position of the characters in lastSeen array
     // in lastSeen value in index 0 denotes 'a''s position, 1 denotes 'b's position and so on
-    const positionMap = {
-        'a': 0,
-        'b': 1,
-        'c': 2
+    const lastSeen = {
+        'a': -1,
+        'b': -1,
+        'c': -1
     }
-    const lastSeen = [-1, -1, -1];
 
     for(let i = 0; i < str.length; i++) {
-        lastSeen[positionMap[str[i]]] = i;
+        lastSeen[str[i]] = i;
         
-        if(lastSeen[0] !== -1 && lastSeen[1] !== -1 && lastSeen[2] !== -1) {
-            count += 1 + Math.min(lastSeen[0], lastSeen[1], lastSeen[2]);
+        if(lastSeen['a'] !== -1 && lastSeen['b'] !== -1 && lastSeen['c'] !== -1) {
+            count += 1 + Math.min(lastSeen['a'], lastSeen['b'], lastSeen['c']);
         }
     }
     return count;
 }
 
-console.log(stringCountBetter('abcabc'));
-console.log(stringCountBetter('aaacb'));
-console.log(stringCountBetter('abc'));
-console.log(stringCountBetter('ab'));
+console.log(stringCountBetter('abcabc')); // 10
+console.log(stringCountBetter('aaacb')); // 3
+console.log(stringCountBetter('abc')); // 1
+console.log(stringCountBetter('ab')); // 0
