@@ -26,7 +26,7 @@ s consists of only uppercase English letters.
 0 <= k <= s.length
  */
 
-// Find longest substring which has (subArr.length - k) same character counts 
+// Find longest substring which has k replacable character counts where k = substring.length - maxFreq of substring
 
 function longestRepeatingCharacterReplacement(str, k) {
     let l = 0;
