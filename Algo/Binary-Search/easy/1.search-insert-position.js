@@ -94,3 +94,36 @@ function searchInsertPosition(arr, target) {
 }
 
 console.log(searchInsertPosition([1, 3, 5, 6], 2));
+
+/**
+ * const graph = {
+  0: [1, 2],
+  1: [0, 3],
+  2: [0],
+  3: [1]
+};
+
+hasPath(graph, 0, 3) → true
+hasPath(graph, 2, 3) → true
+hasPath(graph, 3, 2) → true
+hasPath(graph, 1, 4) → false
+ */
+
+
+function hasPath(graph, src, dest) {
+    const nextNodes = graph[src];
+    
+    for(const node of nextNodes) {
+        if(node === dest) {
+            return true;
+        }
+        hasPath(graph, node, dest);
+    }
+}
+const graph = {
+  0: [1, 2],
+  1: [0, 3],
+  2: [0],
+  3: [1]
+};
+console.log(hasPath(graph, 1, 4));
