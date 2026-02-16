@@ -65,9 +65,11 @@ function validPerfectSquare(n) {
     while(left <= right) {
         const mid = left + Math.floor((right - left) / 2);
 
-        if(mid * mid === n) {
+        const square = mid * mid;
+
+        if(square === n) {
             return true;
-        } else if (mid * mid < n) {
+        } else if (square < n) {
             left = mid + 1;
         } else {
             right = mid - 1;
