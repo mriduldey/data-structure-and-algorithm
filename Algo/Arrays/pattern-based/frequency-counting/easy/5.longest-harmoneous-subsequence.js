@@ -83,6 +83,10 @@ function longestHarmoneousSeq(nums) {
     maxLen = 0;
 
     for(let [num, count] of freq.entries()) {
-        if()
+        if(freq.has(num + 1)) {
+            maxLen = Math.max(maxLen, count + freq.get(num + 1));
+        }
     }
+
+    return maxLen;
 }
