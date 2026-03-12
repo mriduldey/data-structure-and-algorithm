@@ -166,3 +166,17 @@ console.log(subarraySumEqualsK([1, 1, 1], 1)) // 3
 console.log(subarraySumEqualsK([1, 1, 1], 2)) // 2 
 console.log(subarraySumEqualsK([1, 1, 1], 3)) // 1
 console.log(subarraySumEqualsK([0,0,0], 0)) // 6
+
+/**
+ * initial freq and count -> c = 0, {0 : 1}
+
+prefix-sum = -1, c = 0,  {0 : 1, -1 : 1}
+
+prefix-sum = 0, c = 1,  {0 : 1, -1 : 1, 1 : 1}
+
+prefix-sum = 1, c = 2, {0 : 1, -1 : 1, 1 : 2}
+
+prefix-sum = 0, c =  3, {0 : 2, -1 : 1, 1 : 1}
+ */
+console.log(subarraySumEqualsK([-1, 1, 1, -1], 0)) // 3
+
