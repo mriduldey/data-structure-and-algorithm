@@ -150,14 +150,14 @@ function contiguousArray(nums) {
 console.log(contiguousArray([0, 1, 0])) // 2
 
 /**
- * [0,  0, 1, 0, 0, 0, 1,1]
+ * [ 0, 0, 1, 0, 0, 0, 1,1]     // i/p
  * [-1,-1, 1,-1,-1,-1, 1,1]
  * 
  * prefix
  * index -> [ 0, 1, 2, 3, 4, 5, 6, 7]
  * sum   -> [-1,-2,-1,-2,-3,-4,-3,-2]
  * 
- * equal 0 and 1 sub arrays [1... 2]; [1... 3]; [4... 6]; [2... 7]
+ * equal 0 and 1 sub arrays [1... 2]; [1... 3]; [4... 6]; [1... 7]
  * thus, maxLen -> 6
  */
 console.log(contiguousArray([0,0,1,0,0,0,1,1])) // 6
