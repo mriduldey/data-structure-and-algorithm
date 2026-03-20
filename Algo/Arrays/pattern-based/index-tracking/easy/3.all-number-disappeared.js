@@ -133,12 +133,8 @@ nums = [ ] → output [] if empty allowed
 function findDisappearedNum(nums) {
   if (!nums || nums.length === 0) return [];
 
-  const set = new Set();
+  const set = new Set(nums);
   const result = [];
-
-  for (const num of nums) {
-    set.add(num);
-  }
 
   for (let i = 1; i <= nums.length; i++) {
     if (!set.has(i)) {
