@@ -1,4 +1,5 @@
 /**
+ * /**
  * LC 448 — Find All Numbers Disappeared in an Array
  * 1. Problem description with example
 
@@ -130,27 +131,29 @@ nums = [1] → output []
 nums = [ ] → output [] if empty allowed
  */
 
-function findDisappearedNum(nums) {
+function numberDisappeared(nums) {
   if (!nums || nums.length === 0) return [];
 
-  const set = new Set();
   const result = [];
 
-  for (const num of nums) {
-    set.add(num);
+  for (let i = 0; i < nums.length; i++) {
+    const num = Math.abs(nums[i]);
+    const index = num - 1;
+    if (nums[index] > 0) {
+      nums[index] = -nums[index];
+    }
   }
 
-  for (let i = 1; i <= nums.length; i++) {
-    if (!set.has(i)) {
-      result.push(i);
+  for (let i = 0; i < nums.length; i++) {
+    if (nums[i] > 0) {
+      result.push(i + 1);
     }
   }
 
   return result;
 }
 
-
-console.log(findDisappearedNum([]));
-console.log(findDisappearedNum([1, 2, 3, 4]));
-console.log(findDisappearedNum([2, 2, 2, 2]));
-console.log(findDisappearedNum([4,3,2,7,8,2,3,1]));
+console.log(numberDisappeared([]));
+console.log(numberDisappeared([1, 2, 3, 4]));
+console.log(numberDisappeared([2, 2, 2, 2]));
+console.log(numberDisappeared([4, 3, 2, 7, 8, 2, 3, 1]));
