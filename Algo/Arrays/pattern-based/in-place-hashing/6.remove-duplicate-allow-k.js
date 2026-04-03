@@ -3,6 +3,8 @@
 function removeDuplicates(nums, k) {
   const n = nums.length;
 
+  if (k === 0) return 0;
+  if (k <= 0) return null;
   if (n <= k) return n;
 
   insertPos = k;
@@ -12,10 +14,13 @@ function removeDuplicates(nums, k) {
       nums[insertPos++] = nums[i];
     }
   }
-  console.log(nums);
+  
   return insertPos;
 }
 
 console.log(
-  removeDuplicates([1, 1, 2, 2, 2, 2, 3, 3, 4, 5, 6, 7, 7, 7, 7, 7, 7, 7, 8], 2),
+  removeDuplicates(
+    [1, 1, 2, 2, 2, 2, 3, 3, 4, 5, 6, 7, 7, 7, 7, 7, 7, 7, 8],
+    0,
+  ),
 );
