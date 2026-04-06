@@ -53,7 +53,7 @@ What about empty array?
 → Return []
  */
 
-//  --> Only works when duplicate constarins are only 1 or 2. If more below logic will not work
+//  --> Only works when duplicate constraints are only 1 or 2. If more number of duplicates below logic will not work
 function findAllDuplicates(nums) {
   if (!nums || nums.length <= 1) return [];
 
