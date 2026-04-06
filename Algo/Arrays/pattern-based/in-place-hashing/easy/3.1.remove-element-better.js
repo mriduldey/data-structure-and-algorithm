@@ -80,7 +80,7 @@ function removeElementBetter(nums, val) {
 }
 
 
-console.log("new", removeElementBetter([], 1)); // null
+console.log(removeElementBetter([], 1)); // null
 console.log(removeElementBetter([1], 1)); // 0
 console.log(removeElementBetter([1, 1], 1)); // 0
 console.log(removeElementBetter([1, 2], 1)); // 1
