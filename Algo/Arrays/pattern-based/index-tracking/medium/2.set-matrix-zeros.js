@@ -43,7 +43,7 @@ First row or first column contains zero (critical for optimal solution)
  */
 
 function setMatrixZeros(matrix) {
-  if (!matrix || matrix.length === 0) return null;
+  if (!matrix || matrix.length === 0) return matrix;
 
   const m = matrix.length;
   const n = matrix[0].length;
@@ -51,20 +51,14 @@ function setMatrixZeros(matrix) {
   let firstRowHasZero = false;
   let firstColHasZero = false;
 
-  for (let j = 0; j < n; j++) {
-    if (matrix[0][j] === 0) {
-      firstRowHasZero = true;
-    }
-  }
+  // 1. Check if the first row or first column need to be zeroed later
+  for (let i = 0; i < m; i++) if (matrix[i][0] === 0) firstColHasZero = true;
+  for (let j = 0; j < n; j++) if (matrix[0][j] === 0) firstRowHasZero = true;
 
-  for (let i = 0; i < m; i++) {
-    if (matrix[i][0] === 0) {
-      firstColHasZero = true;
-    }
-  }
-
+  // 2. Use the first row and column as storage for markers
+  // We start from (1,1) because (0,0) is handled by the flags above
   for (let i = 1; i < m; i++) {
-    for (let j = 0; j < n; j++) {
+    for (let j = 1; j < n; j++) {
       if (matrix[i][j] === 0) {
         matrix[i][0] = 0;
         matrix[0][j] = 0;
@@ -72,24 +66,21 @@ function setMatrixZeros(matrix) {
     }
   }
 
+  // 3. Zero out cells based on the markers in the first row/col
   for (let i = 1; i < m; i++) {
-    for (let j = 0; j < n; j++) {
+    for (let j = 1; j < n; j++) {
       if (matrix[i][0] === 0 || matrix[0][j] === 0) {
         matrix[i][j] = 0;
       }
     }
   }
 
-  for (let i = 0; i < m; i++) {
-    if (firstColHasZero) {
-      matrix[i][0] = 0;
-    }
+  // 4. Finally, zero out the first row and column if needed
+  if (firstColHasZero) {
+    for (let i = 0; i < m; i++) matrix[i][0] = 0;
   }
-
-  for (let j = 0; j < n; j++) {
-    if (firstRowHasZero) {
-      matrix[0][j] = true;
-    }
+  if (firstRowHasZero) {
+    for (let j = 0; j < n; j++) matrix[0][j] = 0;
   }
 
   return matrix;
