@@ -67,12 +67,14 @@ function reverseArray(arr, k) {
 function reverse(arr, start, end) {
   if (start === end) return;
   const mid = start + Math.floor((end - start) / 2);
-  for (let i = start, j = end; i <= mid; i++, j--) {
-    [arr[i], arr[j]] = [arr[j], arr[i]];
+  while (start < end) {
+    [arr[start], arr[end]] = [arr[end], arr[start]];
+    start++;
+    end--;
   }
 }
 
 console.log(reverseArray([1], 5));
 console.log(reverseArray([1, 2, 3], 5));
 
-console.log(reverseArray([1, 2, 3, 4, 5, 6, 7], 5));
+console.log(reverseArray([1, 2, 3, 4, 5, 6, 7], 3));
