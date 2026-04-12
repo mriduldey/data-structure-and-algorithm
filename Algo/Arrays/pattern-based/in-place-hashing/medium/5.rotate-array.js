@@ -76,5 +76,4 @@ function reverse(arr, start, end) {
 
 console.log(reverseArray([1], 5));
 console.log(reverseArray([1, 2, 3], 5));
-
 console.log(reverseArray([1, 2, 3, 4, 5, 6, 7], 3));
