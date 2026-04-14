@@ -69,7 +69,7 @@ function arrayIntersection(nums1, nums2) {
   for (const num of nums2) {
     if (bucket[num] === 1) {
       result.push(num);
-    //   bucket[num] = 0; // uncomment to get unique value(actual requirement)
+      bucket[num] = 0;
     }
   }
 
