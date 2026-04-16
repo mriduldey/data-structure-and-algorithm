@@ -69,119 +69,110 @@ Final Output
  */
 
 class MaxHeap {
-    constructor() {
-        this.heap = [];
+  constructor() {
+    this.heap = [];
+  }
+
+  size() {
+    return this.heap.length;
+  }
+
+  isEmpty() {
+    return this.size() === 0;
+  }
+
+  peek() {
+    if (this.isEmpty()) return null;
+    return this.heap[0];
+  }
+
+  insert(val) {
+    this.heap.push(val);
+    this._heapifyUp(this.size() - 1);
+  }
+
+  extractMax() {
+    if (this.isEmpty()) return null;
+    if (this.size() === 1) return this.heap.pop();
+
+    const max = this.heap[0];
+    this.heap[0] = this.heap.pop();
+    this._heapifyDown(0);
+    return max;
+  }
+
+  // internal methods
+
+  _parent(i) {
+    return Math.floor((i - 1) / 2);
+  }
+
+  _left(i) {
+    return i * 2 + 1;
+  }
+
+  _right(i) {
+    return i * 2 + 2;
+  }
+
+  _swap(i, j) {
+    [this.heap[i], this.heap[j]] = [this.heap[j], this.heap[i]];
+  }
+
+  _heapifyUp(i) {
+    while (i > 0) {
+      const parent = this._parent(i);
+      if (this.heap[i][0] < this.heap[parent][0]) {
+        break;
+      }
+
+      this._swap(i, parent);
+      i = parent;
     }
+  }
 
-    size() {
-        return this.heap.length;
+  _heapifyDown(i) {
+    const n = this.size();
+    while (true) {
+      let max = i;
+      const left = this._left(i);
+      const right = this._right(i);
+
+      if (left < n && this.heap[left][0] > this.heap[max][0]) {
+        max = left;
+      }
+
+      if (right < n && this.heap[right][0] > this.heap[max][0]) {
+        max = right;
+      }
+
+      if (max === i) {
+        break;
+      }
+
+      this._swap(i, max);
+      i = max;
     }
-
-    isEmpty() {
-        return this.size() === 0;
-    }
-
-    peek() {
-        if(this.isEmpty()) return null;
-        return this.heap[0];
-    }
-
-    insert(val) {
-        this.heap.push(val);
-        this._heapifyUp(this.size() - 1);
-    }
-
-    extractMax() {
-        if(this.isEmpty()) return null;
-        if(this.size() === 1) return this.heap.pop();
-
-        const max = this.heap[0];
-        this.heap[0] = this.heap.pop();
-        this._heapifyDown(0);
-        return max;
-    }
-
-    // internal methods
-
-    _parent(i) {
-        return Math.floor((i - 1) / 2);
-    }
-
-    _left(i) {
-        return i * 2 + 1;
-    }
-
-    _right(i) {
-        return i * 2 + 2;
-    }
-
-    _swap(i, j) {
-        [this.heap[i], this.heap[j]] = [this.heap[j], this.heap[i]];
-    }
-
-    _heapifyUp(i) {
-        while(i > 0) {
-            const parent = this._parent(i);
-            if(this.heap[i][0] < this.heap[parent][0]) {
-                break;
-            }
-
-            this._swap(i, parent);
-            i = parent;
-        }
-    }
-
-    _heapifyDown(i) {
-        const n = this.size();
-        while(true) {
-            let max = i;
-            const left = this._left(i);
-            const right = this._right(i);
-
-            if(left < n && this.heap[left][0] > this.heap[max][0]) {
-                max = left;
-            }
-
-            if(right < n && this.heap[right][0] > this.heap[max][0]) {
-                max = right;
-            }
-
-            if(max === i) {
-                break;
-            }
-
-            this._swap(i, max);
-            i = max;
-        }
-    }
+  }
 }
 
 function findRelativeRank(score) {
-    const n = score.length;
-    const result = new Array(n)
-    const heap = new MaxHeap();
-    for(let i = 0; i < n; i++) {
-        heap.insert([score[i], i]);
-    }
+  const n = score.length;
+  const MEDALS = { 1: "Gold", 2: "Silver", 3: "Bronze" };
+  const result = new Array(n);
+  const heap = new MaxHeap();
+  for (let i = 0; i < n; i++) {
+    heap.insert([score[i], i]);
+  }
 
-    let rank = 1;
-    while(heap.size() > 0) {
-        const [_, index] = heap.extractMax();
+  let rank = 1;
+  while (heap.size() > 0) {
+    const [_, index] = heap.extractMax();
+    result[index] = rank <= 3 ? MEDALS[rank] : rank;
+    rank++;
+  }
 
-        if(rank === 1) {
-            result[index] = "Gold Medal"
-        } else if(rank === 2) {
-            result[index] = "Silver Medal"
-        } else if(rank === 3) {
-            result[index] = "Bronze Medal"
-        } else {
-            result[index] = rank;
-        }
-
-        rank++;
-    }
-
-    return result;
+  return result;
 }
 
 console.log(findRelativeRank([5, 4, 3, 98, 99]));
