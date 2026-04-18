@@ -72,32 +72,34 @@ Negative numbers allowed?
 
 function relativeSortArray(arr1, arr2) {
   const result = [];
-  const freq = new Map();
+  // 1. Initialize buckets (size 1001 based on constraints 0-1000)
+  const bucket = new Array(1001).fill(0);
+
+  // 2. Fill the buckets with frequencies from arr1
   for (const num of arr1) {
-    freq.set(num, (freq.get(num) || 0) + 1);
+    bucket[num]++;
   }
 
+  // 3. First pass: Use arr2 to pull from buckets in specific order
   for (const num of arr2) {
-    let count = freq.get(num);
-    while (count > 0) {
+    while (bucket[num] > 0) {
       result.push(num);
-      count--;
-    }
-    freq.delete(num);
-  }
-
-  const remaining = [];
-  for (let [num, count] of freq.entries()) {
-    while (count > 0) {
-      remaining.push(num);
-      count--;
+      bucket[num]--;
     }
   }
 
-  // Sort ascending
-  remaining.sort((a, b) => a - b);
+  // 4. Second pass: Iterate through the bucket array to get remaining elements
+  // Since we start from 0 to 1000, they are naturally in ascending order
+  for (let i = 0; i < bucket.length; i++) {
+    while (bucket[i] > 0) {
+      result.push(i);
+      bucket[i]--;
+    }
+  }
 
-  return result.concat(remaining);
+  return result;
 }
 
-console.log(relativeSortArray([2,3,1,3,2,4,6,7,9,2,19], [2,1,4,3,9,6])) // [2,2,2,1,4,3,3,9,6,7,19]
+console.log(
+  relativeSortArray([2, 3, 1, 3, 2, 4, 6, 7, 9, 2, 19], [2, 1, 4, 3, 9, 6]),
+); // [2,2,2,1,4,3,3,9,6,7,19]
