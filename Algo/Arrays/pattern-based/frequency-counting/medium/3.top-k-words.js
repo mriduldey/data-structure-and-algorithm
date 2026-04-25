@@ -133,7 +133,7 @@ class MinHeap1 {
   _compare(a, b) {
     // Priority based on index [1]. If equal, alphabetical on index [0]
     if (a[1] === b[1]) {
-      return b[0].localeCompare(a[0]); // Fixed: typo locale_Compare
+      return b[0].localeCompare(a[0]); // Descending order
     }
     return a[1] - b[1];
   }
