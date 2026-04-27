@@ -131,7 +131,7 @@ class MinHeap1 {
   }
 
   _compare(a, b) {
-    // Priority based on index [1]. If equal, alphabetical on index [0]
+    // Priority based on index-[1](freq). If equal, alphabetical on index-[0](word)
     if (a[1] === b[1]) {
       return b[0].localeCompare(a[0]); // Descending order
     }
@@ -199,4 +199,4 @@ function topKFreqWords(words, k) {
   return result.reverse();
 }
 
-console.log(topKFreqWords(["i","love","leetcode","i","love","you", "you","coding"], 3))
+console.log(topKFreqWords(["i","love","leetcode","i","love","you", "you","coding"], 4))
