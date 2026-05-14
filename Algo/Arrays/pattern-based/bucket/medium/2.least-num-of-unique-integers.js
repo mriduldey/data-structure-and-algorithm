@@ -59,26 +59,30 @@ Is array guaranteed non-empty?
 Do we need to return remaining elements or just count?
  */
 
-function leastNumOfUniqueInts(arr, k) {
+function leastUniqueInts(arr, k) {
   const freq = new Map();
-  for (const num of arr) {
-    freq.set(num, (freq.get(num) || 0) + 1);
+  for (const n of arr) {
+    freq.set(n, (freq.get(n) || 0) + 1);
   }
 
-  const counts = Array.from(freq.values()).sort((a, b) => a - b);
+  const bucket = new Array(arr.length + 1).fill(0);
 
-  let unique = counts.length;
+  for(const f of freq.values()) {
+    bucket[f]++;
+  }
 
-  for (const count of counts) {
-    if (k >= count) {
-      k -= count;
-      unique--;
-    } else {
-      break;
+  let unique = freq.size;
+
+  for(let i = 1; i < arr.length; i++) {
+    while(bucket[i] > 0 && k >= i) {
+        k -= i;
+        bucket[i]--;
+        unique--;
     }
   }
 
   return unique;
 }
 
-console.log(leastNumOfUniqueInts([5, 5, 4, 4, 4, 8, 8, 8, 5], 4));
+
+console.log(leastUniqueInts([5, 5, 4, 4, 8, 8, 5], 4));
