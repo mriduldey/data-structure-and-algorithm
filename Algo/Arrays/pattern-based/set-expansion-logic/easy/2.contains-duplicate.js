@@ -96,7 +96,7 @@ Space: O(n)
 function containsDuplicate(nums) {
   const seen = new Set(nums);
 
-  return seen.size === nums.length;
+  return seen.size !== nums.length;
 }
 
 
