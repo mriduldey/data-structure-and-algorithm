@@ -93,11 +93,23 @@ Time: O(n)
 Space: O(n)
  */
 
-function containsDuplicate(nums) {
+function containsDuplicate1(nums) {
   const seen = new Set(nums);
 
   return seen.size !== nums.length;
 }
 
+function containsDuplicate2(nums) {
+  const seen = new Set();
 
-console.log(containsDuplicate([1, 2, 3, 6, 4, 5]))
+  for (const num of nums) {
+    if (seen.has(num)) {
+      return true;
+    }
+    seen.add(num);
+  }
+
+  return false;
+}
+
+console.log(containsDuplicate2([1, 2, 3, 6, 4, 5]));
