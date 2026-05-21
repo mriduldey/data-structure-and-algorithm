@@ -113,6 +113,7 @@ Relevant edge cases:
 [1,2,2,5,3,5] →2
  */
 
+// Not optimal as -->  O(nlogn); supposed to be --> O(n)
 function thirdLargest(nums) {
   const arr = [...new Set(nums)];
   arr.sort((a, b) => a - b);
