@@ -106,7 +106,7 @@ function isValidSudoku(board) {
     for (let c = 0; c < 9; c++) {
       const val = board[r][c];
 
-      if (val === ".") continue;
+      if (val === ".") continue ;
 
       const box = Math.floor(r / 3) * 3 + Math.floor(c / 3);
 
