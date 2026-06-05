@@ -139,12 +139,14 @@ function findSumPath(root, result, remaining, path = []) {
 
   path.push(root.val);
 
-  if (!root.left && !root.right && remaining === root.val) {
+  remaining -= root.val; 
+
+  if (!root.left && !root.right && remaining === 0) {
     result.push([...path]);
   }
 
-  findSumPath(root.left, result, remaining - root.val, path);
-  findSumPath(root.right, result, remaining - root.val, path);
+  findSumPath(root.left, result, remaining, path);
+  findSumPath(root.right, result, remaining, path);
 
   path.pop();
 }
