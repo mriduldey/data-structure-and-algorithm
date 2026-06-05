@@ -129,7 +129,7 @@ function pathSum2(root, targetSum) {
   if (!root) return null;
 
   const result = [];
-  findSumPath(root, result, targetSum, []);
+  findSumPath(root, result, targetSum);
 
   return result;
 }
