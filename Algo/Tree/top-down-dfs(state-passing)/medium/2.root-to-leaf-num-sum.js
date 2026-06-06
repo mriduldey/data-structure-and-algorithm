@@ -115,29 +115,22 @@ O(h) space
 function rootToLeafNumSum(root) {
   if (!root) return null;
 
-  const nums = [];
-  let result = 0;
-  getRootToLeafNum(root, nums, []);
-
-  for (const num of nums) {
-    result += num;
-  }
-
-  return result;
+  return getRootToLeafNum(root, 0);
 }
 
-function getRootToLeafNum(root, nums, path) {
-  if (!root) return;
+function getRootToLeafNum(root, currentSum) {
+  if (!root) return 0;
 
-  path.push(root.val);
+  currentSum = currentSum * 10 + root.val;
 
   if (!root.left && !root.right) {
-    nums.push(Number(path.join("")));
+    return currentSum;
   }
 
-  root.left && getRootToLeafNum(root.left, nums, path);
-  root.right && getRootToLeafNum(root.right, nums, path);
-  path.pop();
+  return (
+    getRootToLeafNum(root.left, currentSum) +
+    getRootToLeafNum(root.right, currentSum)
+  );
 }
 
 class TreeNode {
@@ -147,6 +140,7 @@ class TreeNode {
     this.right = right;
   }
 }
+``;
 
 function runTests() {
   console.log("--- STARTING BINARY TREE TESTS ---\n");
