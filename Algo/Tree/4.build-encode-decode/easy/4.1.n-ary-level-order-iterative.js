@@ -63,23 +63,130 @@ This affects iterative-versus-recursive implementation choice.
  */
 
 function levelOrder(root) {
+  if (!root) return [];
+
   const result = [];
 
-  function dfs(node, depth) {
-    if (!node) return;
+  const queue = [root];
+  let front = 0;
 
-    if (result.length === depth) {
-      result.push([]);
+  while (front < queue.length) {
+    const lavelSize = queue.length - front;
+
+    const currentLevel = [];
+
+    for (let i = 0; i < lavelSize; i++) {
+      const node = queue[front++];
+
+      currentLevel.push(node.val);
+
+      for (const child of node.children ?? []) {
+        child && queue.push(child);
+      }
     }
 
-    result[depth].push(node.val);
-
-    for (const child of node.children ?? []) {
-      child && dfs(child, depth + 1);
-    }
+    result.push(currentLevel);
   }
-
-  dfs(root, 0);
 
   return result;
 }
+
+// Node definition
+function Node(val, children) {
+  this.val = val === undefined ? 0 : val;
+  this.children = children === undefined ? [] : children;
+}
+
+// -----------------------------------------------------------------------------
+// Tree 1: Empty Tree
+// -----------------------------------------------------------------------------
+const tree1 = null;
+
+// -----------------------------------------------------------------------------
+// Tree 2: Single Node Tree
+//      42
+// -----------------------------------------------------------------------------
+const tree2 = new Node(42);
+
+// -----------------------------------------------------------------------------
+// Tree 3: Classic N-ary Tree (Standard 3-Level)
+//        1
+//      / | \
+//     3  2  4
+//    / \
+//   5   6
+// -----------------------------------------------------------------------------
+const tree3 = new Node(1, [
+  new Node(3, [new Node(5), new Node(6)]),
+  new Node(2),
+  new Node(4)
+]);
+
+// -----------------------------------------------------------------------------
+// Tree 4: Deep Linear Tree (Single Child Path)
+//   100
+//    |
+//   200
+//    |
+//   300
+//    |
+//   400
+// -----------------------------------------------------------------------------
+const tree4 = new Node(100, [
+  new Node(200, [
+    new Node(300, [
+      new Node(400)
+    ])
+  ])
+]);
+
+// -----------------------------------------------------------------------------
+// Tree 5: Wide "Star" Tree (Shallow with high fan-out)
+//          10
+//     /  /  |  \  \
+//    1  2   3   4  5
+// -----------------------------------------------------------------------------
+const tree5 = new Node(10, [
+  new Node(1),
+  new Node(2),
+  new Node(3),
+  new Node(4),
+  new Node(5)
+]);
+
+// -----------------------------------------------------------------------------
+// Tree 6: Asymmetric Deep Multi-Branch Tree
+//              1
+//         /    |    \
+//        2     3     4
+//       / \    |   / | \
+//      5   6   7  8  9  10
+//              |
+//             11
+// -----------------------------------------------------------------------------
+const tree6 = new Node(1, [
+  new Node(2, [new Node(5), new Node(6)]),
+  new Node(3, [new Node(7, [new Node(11)])]),
+  new Node(4, [new Node(8), new Node(9), new Node(10)])
+]);
+
+// -----------------------------------------------------------------------------
+// Executing levelOrder on all examples
+// -----------------------------------------------------------------------------
+console.log("Tree 1 (Empty):", levelOrder(tree1));
+// Output: []
+
+console.log("Tree 2 (Single Node):", levelOrder(tree2));
+// Output: [[42]]
+
+console.log("Tree 3 (Standard):", levelOrder(tree3));
+// Output: [[1], [3, 2, 4], [5, 6]]
+
+console.log("Tree 4 (Linear):", levelOrder(tree4));
+// Output: [[100], [200], [300], [400]]
+
+console.log("Tree 5 (Star):", levelOrder(tree5));
+// Output: [[10], [1, 2, 3, 4, 5]]
+
+console.log("Tree 6 (Asymmetric):", levelOrder(tree6));
+// Output: [[1], [2, 3, 4], [5, 6, 7, 8, 9, 10], [11]]
