@@ -21,7 +21,7 @@ If width of each block is 1, compute how much water can be trapped between the b
  Explanation:
  No water will be trapped.
  Expected Time Complexity: O(N)
- Expected Auxiliary Space: O(N)
+ Expected Auxiliary Space: O(N) xy
 
 
  Constraints:
